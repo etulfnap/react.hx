@@ -7,20 +7,18 @@ class App extends React
 	static function main() 
 	{
 		React.renderComponent(
-			@dom '<App />',
+			@dom '<App greeter="world" />',
 			 js.Browser.document.body
 		);
 	}
 	
 	//----------------------------------------------------------------
-	
-	var greeter = "world";
 		
 	public function render() 
 	{
 		return @dom '
 			<div>
-				<h1>Hello {this.greeter}!</h1>
+				<h1>Hello {this.props.greeter}!</h1>
 			</div>
 		';
 	}	

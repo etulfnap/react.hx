@@ -5,11 +5,9 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var App = function() {
-	this.greeter = "world";
-};
+var App = function() { };
 App.main = function() {
-	React.renderComponent(/** @jsx React.DOM */ App(null ),window.document.body);
+	React.renderComponent(/** @jsx React.DOM */ App( {greeter:"world"} ),window.document.body);
 };
 App.create = function(arg) {
 	return App(arg);
@@ -17,7 +15,7 @@ App.create = function(arg) {
 App.__super__ = React;
 App.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Hello ", this.greeter,"!"), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Hello ", this.props.greeter,"!"), " " );
 	}
 });
 App = 
