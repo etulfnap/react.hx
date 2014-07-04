@@ -1,11 +1,49 @@
-react.hx
-========
+# react.hx
 
-This is a fork of Franco Ponticelli's React.hx - Haxe wrap to React.js (proof of concept)
+### example-minimal
+Simplistic example with one single React component, the App class.
 
-**example-commentbox** (renamed from *demo*) closely follows the official React tutorial: http://facebook.github.io/react/docs/tutorial.html
+To start the whole thing, we use the following static main entry point. As seen, it will render a component called App, and pass a greeting property to it with the value "world":
+```haxe
+	static function main() 
+	{
+		React.renderComponent(
+			@dom '<App greeter="world" />',
+			 js.Browser.document.body
+		);
+	}
+```
+Note the @dom meta directive preceeding the xml block - that is what kicks of the jsx transformation from xml into valid React javascript code for building the DOM elements.
 
-**example-filterproducts** roughly follows the "Thinking in React" tutorial: http://facebook.github.io/react/docs/thinking-in-react.html
+The App class itself has only one method, render(). Here, we can see how the greeting value can be reached as a property of the App class, as ```this.props.greeter```.
+
+```haxe
+package ;
+
+import react.React;
+
+class App extends React
+{	
+  ...
+
+  public function render()
+  {
+    return @dom '
+      <div>
+        <h1>Hello {this.props.greeter}!</h1>
+      </div>
+      ';
+  }	
+}
+```
+
+
+
+### example-commentbox
+Closely follows the official React tutorial: http://facebook.github.io/react/docs/tutorial.html
+
+### example-filterproducts
+Roughly follows the "Thinking in React" tutorial: http://facebook.github.io/react/docs/thinking-in-react.html
 
 
 Changes from original react.hx:
