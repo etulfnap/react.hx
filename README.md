@@ -15,7 +15,7 @@ To start the whole thing, we use the following static main entry point. As seen,
 ```
 Note the @dom meta directive preceeding the xml block - that is what kicks of the jsx transformation from xml into valid React javascript code for building the DOM elements.
 
-The App class itself has only one method, render(). Here, we can see how the greeting value can be reached as a property of the App class, as ```this.props.greeter```.
+The App class itself has only one method, render(). Here, we can see how the greeting value can be reached as a property of the App class, as ```this.props.greeter```:
 
 ```haxe
 package ;
