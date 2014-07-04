@@ -2,10 +2,24 @@
 <html>
 <head>
 	<title>React Demo</title>
+	<style>
+		.client {
+			padding: 4px;
+			border: 1px solid #aaaaaa;
+			background-color: #aaFFaa;
+		}
+		.server {
+			padding: 4px;
+			border: 1px solid #aaaaaa;
+			background-color: #aaaaFF;
+		}
+	
+	</style>
 </head>
 <body>
-
+	<p>Simple React/pushstate demo using Jason O'Neil's <a href="https://github.com/jasononeil/hxpushstate">PushState</a> library. Make sure to change the js src tags on this index.page to reflect your url root. Now they are set to http://localhost:2000/</p>
+	<div id="content" />
 </body>
-	<script src="./react.js"></script>
-	<script src="./app.js"></script>
+	<script src="http://localhost:2000/react.js"></script>
+	<script src="http://localhost:2000/app.js"></script>
 </html>

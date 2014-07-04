@@ -12,7 +12,9 @@ App.main = function() {
 	pushstate.PushState.addEventListener(null,function(url) {
 		App.stateChangeCount++;
 		console.log([url,Std.string(App.stateChangeCount)]);
-		React.renderComponent(/** @jsx React.DOM */ App(null ),window.document.body);
+		var pagemode;
+		if(App.stateChangeCount > 1) pagemode = "client"; else pagemode = "server";
+		React.renderComponent(/** @jsx React.DOM */ App( {pagemode:pagemode}),window.document.getElementById("content"));
 	});
 };
 App.create = function(arg) {
@@ -24,11 +26,11 @@ App.prototype = $extend(React.prototype,{
 		var page;
 		var _g = pushstate.PushState.currentPath;
 		switch(_g) {
-		case "/hello":
-			page = /** @jsx React.DOM */ PageHello(null );
+		case "/about":
+			page = /** @jsx React.DOM */ PageAbout(null );
 			break;
-		case "/hello/":
-			page = /** @jsx React.DOM */ PageHello(null );
+		case "/home":
+			page = /** @jsx React.DOM */ PageHome(null );
 			break;
 		case "/":
 			page = /** @jsx React.DOM */ PageHome(null );
@@ -36,7 +38,18 @@ App.prototype = $extend(React.prototype,{
 		default:
 			page = /** @jsx React.DOM */ Page404(null );
 		}
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.ul(null,  " ", React.DOM.li(null, React.DOM.a( {href:"/", rel:"pushstate"}, "/home")), " ", React.DOM.li(null, React.DOM.a( {href:"/hello", rel:"pushstate"}, "/hello")), " ", React.DOM.li(null, React.DOM.a( {href:"/hello"} , "/hello (non pushstate link)")), " ", React.DOM.li(null, React.DOM.a( {href:"/xyz", rel:"pushstate"}, "/(non-existing page)")), " " ), " ", React.DOM.hr(null ), " ", page, " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Page generation mode: ", PageMode( {pagemode:this.props.pagemode} )), " ", React.DOM.ul(null,  " ", React.DOM.li(null, React.DOM.a( {href:"/", rel:"pushstate"}, "/home")), " ", React.DOM.li(null, React.DOM.a( {href:"/about", rel:"pushstate"}, "/about")), " ", React.DOM.li(null, React.DOM.a( {href:"/about"} , "/about (non pushstate link)")), " ", React.DOM.li(null, React.DOM.a( {href:"/x/y/z", rel:"pushstate"}, "/(non-existing page)")), " " ), " ", React.DOM.hr(null ), " ", page, " " );
+	}
+});
+var PageMode = function() { };
+PageMode.__name__ = true;
+PageMode.create = function(arg) {
+	return PageMode(arg);
+};
+PageMode.__super__ = React;
+PageMode.prototype = $extend(React.prototype,{
+	render: function() {
+		if(this.props.pagemode == "client") return /** @jsx React.DOM */ React.DOM.span( {className:"client"}, "Client only"); else return /** @jsx React.DOM */ React.DOM.span( {className:"server"}, "Server roundtrip");
 	}
 });
 var PageHome = function() { };
@@ -47,7 +60,7 @@ PageHome.create = function(arg) {
 PageHome.__super__ = React;
 PageHome.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " Home " ), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null, "Home"), " ", React.DOM.p(null, "Welcome to this home page!"), " " );
 	}
 });
 var Page404 = function() { };
@@ -58,18 +71,19 @@ Page404.create = function(arg) {
 Page404.__super__ = React;
 Page404.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " 404 " ), " " );
+		var url = pushstate.PushState.currentPath;
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " 404 " ), " ", React.DOM.p(null, "Current path: ", url), " " );
 	}
 });
-var PageHello = function() { };
-PageHello.__name__ = true;
-PageHello.create = function(arg) {
-	return PageHello(arg);
+var PageAbout = function() { };
+PageAbout.__name__ = true;
+PageAbout.create = function(arg) {
+	return PageAbout(arg);
 };
-PageHello.__super__ = React;
-PageHello.prototype = $extend(React.prototype,{
+PageAbout.__super__ = React;
+PageAbout.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " Hello! " ), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null, "About"), " ", React.DOM.p(null, "Some intresting stuff about something..."), " " );
 	}
 });
 var HxOverrides = function() { };
@@ -306,6 +320,18 @@ App =
 						c.statics = statics;
 						return c;
 					})());
+PageMode = 
+					React.createClass((function() {
+						var statics = {};
+						for(var field in PageMode)
+							statics[field] = PageMode[field];
+						var c = new PageMode;
+						for(var field in PageMode.prototype) {
+							c[field] = PageMode.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
 PageHome = 
 					React.createClass((function() {
 						var statics = {};
@@ -330,14 +356,14 @@ Page404 =
 						c.statics = statics;
 						return c;
 					})());
-PageHello = 
+PageAbout = 
 					React.createClass((function() {
 						var statics = {};
-						for(var field in PageHello)
-							statics[field] = PageHello[field];
-						var c = new PageHello;
-						for(var field in PageHello.prototype) {
-							c[field] = PageHello.prototype[field];
+						for(var field in PageAbout)
+							statics[field] = PageAbout[field];
+						var c = new PageAbout;
+						for(var field in PageAbout.prototype) {
+							c[field] = PageAbout.prototype[field];
 						}
 						c.statics = statics;
 						return c;
