@@ -17,7 +17,6 @@ class App extends React
 	}
 	
 	//----------------------------------------------------------------
-		
 	public function render() 
 	{
 		return @dom '
@@ -27,7 +26,5 @@ class App extends React
 		';
 	}	
 }
-
-
 
 

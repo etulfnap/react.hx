@@ -24,21 +24,37 @@ App.__super__ = React;
 App.prototype = $extend(React.prototype,{
 	render: function() {
 		var page;
-		var _g = pushstate.PushState.currentPath;
-		switch(_g) {
-		case "/about":
-			page = /** @jsx React.DOM */ PageAbout(null );
-			break;
-		case "/home":
-			page = /** @jsx React.DOM */ PageHome(null );
-			break;
-		case "/":
-			page = /** @jsx React.DOM */ PageHome(null );
-			break;
-		default:
-			page = /** @jsx React.DOM */ Page404(null );
+		{
+			var _g = StrTools.trimString(pushstate.PushState.currentPath.toLowerCase(),"/").split("/");
+			switch(_g.length) {
+			case 1:
+				switch(_g[0]) {
+				case "":case "home":
+					page = /** @jsx React.DOM */ PageHome(null );
+					break;
+				case "about":
+					page = /** @jsx React.DOM */ PageAbout(null );
+					break;
+				default:
+					page = /** @jsx React.DOM */ Page404(null );
+				}
+				break;
+			case 3:
+				switch(_g[0]) {
+				case "params":
+					var param1 = _g[2];
+					var param0 = _g[1];
+					page = /** @jsx React.DOM */ PageParams( {param0:param0, param1:param1} );
+					break;
+				default:
+					page = /** @jsx React.DOM */ Page404(null );
+				}
+				break;
+			default:
+				page = /** @jsx React.DOM */ Page404(null );
+			}
 		}
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Page generation mode: ", PageMode( {pagemode:this.props.pagemode} )), " ", React.DOM.ul(null,  " ", React.DOM.li(null, React.DOM.a( {href:"/", rel:"pushstate"}, "/home")), " ", React.DOM.li(null, React.DOM.a( {href:"/about", rel:"pushstate"}, "/about")), " ", React.DOM.li(null, React.DOM.a( {href:"/about"} , "/about (non pushstate link)")), " ", React.DOM.li(null, React.DOM.a( {href:"/x/y/z", rel:"pushstate"}, "/(non-existing page)")), " " ), " ", React.DOM.hr(null ), " ", page, " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.ul(null,  " ", React.DOM.li(null, "Menu"), " ", React.DOM.li(null, React.DOM.a( {href:"/", rel:"pushstate"}, "/home")), " ", React.DOM.li(null, React.DOM.a( {href:"/about", rel:"pushstate"}, "/about")), " ", React.DOM.li(null, React.DOM.a( {href:"/about"} , "/about (non pushstate link)")), " ", React.DOM.li(null, React.DOM.a( {href:"/params/123/edit", rel:"pushstate"}, "/params/123/edit")), " ", React.DOM.li(null, React.DOM.a( {href:"/params/444/update", rel:"pushstate"}, "/params/444/update")), " ", React.DOM.li(null, React.DOM.a( {href:"/x/y/z", rel:"pushstate"}, "/(non-existing page)")), " " ), " ", React.DOM.p(null, "Page generation mode: ", PageMode( {pagemode:this.props.pagemode} )), " ", React.DOM.hr(null ), " ", page, " " );
 	}
 });
 var PageMode = function() { };
@@ -49,7 +65,7 @@ PageMode.create = function(arg) {
 PageMode.__super__ = React;
 PageMode.prototype = $extend(React.prototype,{
 	render: function() {
-		if(this.props.pagemode == "client") return /** @jsx React.DOM */ React.DOM.span( {className:"client"}, "Client only"); else return /** @jsx React.DOM */ React.DOM.span( {className:"server"}, "Server roundtrip");
+		if(this.props.pagemode == "client") return /** @jsx React.DOM */ React.DOM.span( {className:"client"}, "Client"); else return /** @jsx React.DOM */ React.DOM.span( {className:"server"}, "Server roundtrip");
 	}
 });
 var PageHome = function() { };
@@ -72,7 +88,7 @@ Page404.__super__ = React;
 Page404.prototype = $extend(React.prototype,{
 	render: function() {
 		var url = pushstate.PushState.currentPath;
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " 404 " ), " ", React.DOM.p(null, "Current path: ", url), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null,  " 404 " ), " ", React.DOM.p(null ,  " Current path: ",  url ), " ", React.DOM.p(null, React.DOM.a( {href:"/", rel:"pushstate"}, "Go home!")), " " );
 	}
 });
 var PageAbout = function() { };
@@ -84,6 +100,17 @@ PageAbout.__super__ = React;
 PageAbout.prototype = $extend(React.prototype,{
 	render: function() {
 		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null, "About"), " ", React.DOM.p(null, "Some intresting stuff about something..."), " " );
+	}
+});
+var PageParams = function() { };
+PageParams.__name__ = true;
+PageParams.create = function(arg) {
+	return PageParams(arg);
+};
+PageParams.__super__ = React;
+PageParams.prototype = $extend(React.prototype,{
+	render: function() {
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h3(null, "Params"), " ", React.DOM.p(null, "First parameter: ", React.DOM.strong(null, this.props.param0)), " ", React.DOM.p(null, "Second parameter: ", React.DOM.strong(null, this.props.param1)), " " );
 	}
 });
 var HxOverrides = function() { };
@@ -119,6 +146,32 @@ var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
 	return js.Boot.__string_rec(s,"");
+};
+var StrTools = function() { };
+StrTools.__name__ = true;
+StrTools.ltrimString = function(s,remove) {
+	if(remove == null) remove = " ";
+	while(StringTools.startsWith(s,remove)) s = HxOverrides.substr(s,remove.length,null);
+	return s;
+};
+StrTools.rtrimString = function(s,remove) {
+	if(remove == null) remove = " ";
+	while(StringTools.endsWith(s,remove)) s = HxOverrides.substr(s,0,s.length - remove.length);
+	return s;
+};
+StrTools.trimString = function(s,remove) {
+	if(remove == null) remove = " ";
+	return StrTools.rtrimString(StrTools.ltrimString(s,remove),remove);
+};
+var StringTools = function() { };
+StringTools.__name__ = true;
+StringTools.startsWith = function(s,start) {
+	return s.length >= start.length && HxOverrides.substr(s,0,start.length) == start;
+};
+StringTools.endsWith = function(s,end) {
+	var elen = end.length;
+	var slen = s.length;
+	return slen >= elen && HxOverrides.substr(s,slen - elen,elen) == end;
 };
 var js = {};
 js.Boot = function() { };
@@ -364,6 +417,18 @@ PageAbout =
 						var c = new PageAbout;
 						for(var field in PageAbout.prototype) {
 							c[field] = PageAbout.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
+PageParams = 
+					React.createClass((function() {
+						var statics = {};
+						for(var field in PageParams)
+							statics[field] = PageParams[field];
+						var c = new PageParams;
+						for(var field in PageParams.prototype) {
+							c[field] = PageParams.prototype[field];
 						}
 						c.statics = statics;
 						return c;

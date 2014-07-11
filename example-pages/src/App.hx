@@ -2,6 +2,8 @@ package ;
 
 import react.React;
 import pushstate.PushState;
+using StrTools;
+
 
 class App extends React
 {	
@@ -24,23 +26,27 @@ class App extends React
 	
 	public function render() 
 	{
-		var page = switch PushState.currentPath
+
+		var page = switch PushState.currentPath.toLowerCase().trimString('/').split('/')
 		{
-			case "/about": @dom '<PageAbout />';
-			case "/home": @dom '<PageHome />';
-			case "/": @dom '<PageHome />';
-			default: @dom '<Page404 />';
+			case [''] | ['home'] : @dom '<PageHome />';
+			case ['about']: @dom '<PageAbout />';
+			case ['params', param0, param1]: @dom '<PageParams param0={param0} param1={param1} />';
+			case _: @dom '<Page404 />';
 		}
 		
 		return @dom '
 			<div>
-				<p>Page generation mode: <PageMode pagemode={this.props.pagemode} /></p>
 				<ul>
+					<li>Menu</li>
 					<li><a href="/" rel="pushstate">/home</a></li>				
 					<li><a href="/about" rel="pushstate">/about</a></li>
 					<li><a href="/about" >/about (non pushstate link)</a></li>
+					<li><a href="/params/123/edit" rel="pushstate">/params/123/edit</a></li>
+					<li><a href="/params/444/update" rel="pushstate">/params/444/update</a></li>
 					<li><a href="/x/y/z" rel="pushstate">/(non-existing page)</a></li>
 				</ul>
+				<p>Page generation mode: <PageMode pagemode={this.props.pagemode} /></p>
 				<hr />
 				{page}
 			</div>
@@ -52,7 +58,7 @@ class PageMode extends React
 {
 	public function render()
 	{
-		return  (this.props.pagemode == 'client') ? @dom '<span className="client">Client only</span>' : @dom '<span className="server">Server roundtrip</span>' ;
+		return  (this.props.pagemode == 'client') ? @dom '<span className="client">Client</span>' : @dom '<span className="server">Server roundtrip</span>' ;
 	}
 	
 }
@@ -81,7 +87,8 @@ class Page404 extends React
 				<h3>
 					404
 				</h3>
-				<p>Current path: {url}</p>
+				< p > Current path: { url }</p>
+				<p><a href="/" rel="pushstate">Go home!</a></p>
 			</div>
 		';
 	}
@@ -97,5 +104,19 @@ class PageAbout extends React
 				<p>Some intresting stuff about something...</p>
 			</div>
 		';
+	}
+}
+
+class PageParams extends React
+{
+	public function render() 
+	{
+		return @dom '	
+			<div>
+				<h3>Params</h3>
+				<p>First parameter: <strong>{this.props.param0}</strong></p>
+				<p>Second parameter: <strong>{this.props.param1}</strong></p>
+			</div>
+		';	
 	}
 }
