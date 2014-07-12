@@ -1,8 +1,17 @@
+-cp src 
+-cp ../libs 
+-cp ../src 
+-js bin/server.js 
+-D nodejs 
+-main Server 
+--remap sys:sys
+
+-cmd neko add-require-react.n bin/server.js
+
+--next
+
+-js bin/client.js
+-main Client
 -cp src
 -cp ../src
 -cp ../libs
--D nodejs 
--js bin/example.js 
--main Main
-
--cmd neko add-require-react.n
