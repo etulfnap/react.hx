@@ -3,6 +3,7 @@ package ;
 import js.Node; 
 
 import react.React;
+using DateTools;
 
 // var React = require('react');
 
@@ -20,10 +21,9 @@ class Main extends React
 	
 	public static function main() 
 	{ 
-		var comp = @dom '<div>This page is rendered on the server using <strong>React.hx</strong></div>';
-		var compstr = React.renderComponentToString(comp);
-		// trace(compstr);
-		
+		var date = Date.now().format('%H:%M:%S');		
+		var comp = @dom '<div>This page is server-rendered at <strong>{date}</strong> using <strong>React.hx</strong></div>';
+		var compstr = React.renderComponentToString(comp);		
 		var server = Node.http.createServer( function( 
 			req:NodeHttpServerReq, res:NodeHttpServerResp) { 
 				res.setHeader("Content-Type", "text/html"); 
