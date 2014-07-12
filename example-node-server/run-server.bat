@@ -1,1 +1,1 @@
-node bin\example.js
+supervisor bin/server.js

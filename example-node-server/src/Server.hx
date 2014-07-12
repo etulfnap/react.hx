@@ -16,7 +16,8 @@ class Server extends React
 	{ 		
 		var server = Node.http.createServer( function( 
 		
-			req:NodeHttpServerReq, res:NodeHttpServerResp) { 
+			req:NodeHttpServerReq, res:NodeHttpServerResp) 
+			{
 				// Asking for a static .js file?
 				var staticFilename =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');
 				if (FileSystem.exists(staticFilename) && !FileSystem.isDirectory(staticFilename))
@@ -30,7 +31,8 @@ class Server extends React
 				// Anything else - here just server index page...
 				else
 				{
-					//trace('Index');
+					var content = React.renderComponentToString(@dom '<Content />');
+					
 					var html = '
 						<!doctype html>
 						<html>
@@ -38,9 +40,7 @@ class Server extends React
 							<title>React Demo</title>
 						</head>
 						<body>
-						'
-						+	React.renderComponentToString(@dom '<Content />') + 
-						'
+						$content
 						</body>
 						<script src="http://localhost:2000/react.js" type="text/javascript"></script>
 						<script src="http://localhost:2000/client.js" type="text/javascript"></script>
@@ -58,7 +58,7 @@ class Server extends React
 		trace( 'Server running at http://127.0.0.1:2000/' ); 
 	} 
 	
-	public function render() return @dom 'dummy';
+	public function render() return @dom 'dummyx';
 }
 
 /*
