@@ -1,6 +1,8 @@
 -cp src
--cp libs
--lib nodejs 
+-cp ../src
+-cp ../libs
 -D nodejs 
 -js bin/example.js 
 -main Main
+
+-cmd neko add-require-react.n

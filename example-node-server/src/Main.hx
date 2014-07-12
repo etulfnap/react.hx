@@ -20,9 +20,9 @@ class Main extends React
 	
 	public static function main() 
 	{ 
-		var comp = @dom '<div>This page is rendered on the server using <strong>ReactJS</strong></div>';
+		var comp = @dom '<div>This page is rendered on the server using <strong>React.hx</strong></div>';
 		var compstr = React.renderComponentToString(comp);
-		trace(compstr);
+		// trace(compstr);
 		
 		var server = Node.http.createServer( function( 
 			req:NodeHttpServerReq, res:NodeHttpServerResp) { 
@@ -32,8 +32,8 @@ class Main extends React
 			} 
 		); 
 		
-		server.listen(1337, "localhost"); 
-		trace( 'Server running at http://127.0.0.1:1337/' ); 
+		server.listen(2000, "localhost"); 
+		trace( 'Server running at http://127.0.0.1:2000/' ); 
 	} 
 }
 
