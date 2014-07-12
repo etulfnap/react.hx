@@ -1,0 +1,6 @@
+-cp src
+-cp libs
+-lib nodejs 
+-D nodejs 
+-js bin/example.js 
+-main Main
