@@ -46,6 +46,7 @@ class Client extends React
 			}, 2000);					
 		});	
 		
+		
 	}	
 	
 	public function render() return @dom 'dummy';
