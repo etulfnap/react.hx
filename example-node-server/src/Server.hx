@@ -1,68 +1,61 @@
-package ;
-import sys.io.File;
-
-import haxe.Timer;
-import js.Node; 
-import sys.FileSystem;
-import sys.io.File;
+import comps.Home;
+import comps.About;
+import comps.Error404;
+import comps.RenderMode;
+import js.npm.connect.Static;
+import js.npm.Express;
+import js.npm.express.*;
 import react.React;
-import Components;
-using StringTools;
-using StrTools;
 
-class Server extends React 
-{ 
+using StringTools;
+
+class Server  
+{
+	function new(port:Int)
+	{
+		var server = new Express();
+		server.use( new Static( js.Node.__dirname + "/public" ) );		
+		server.get("*", defaultHandler);
+		server.listen( port );
+	}
 	
-	public static function main() 
-	{ 
-		var server = Node.http.createServer( function( 
-		
-			req:NodeHttpServerReq, res:NodeHttpServerResp) 
-			{
-				// Asking for a javascript file?
-				var fullpath =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');				
-				if (fullpath.endsWith('.js') && FileSystem.exists(fullpath))
-				{
-					var content = File.getContent(fullpath);
-					res.setHeader("Content-Type", "text/javascript"); 
-					res.writeHead(200); 
-					res.end(content); 					
-				}
-				
-				// Anything else - here just server index page...
-				else
-				{
-					var content = React.renderComponentToString(@dom '<Content />');
-					
-					var html = '
-						<!doctype html>
-						<html>
-						<head>
-							<title>React Demo</title>
-						</head>
-						<body>
-							$content
-						</body>
-						<script src="/react.js" type="text/javascript"></script>
-						<script src="/client.js" type="text/javascript"></script>
-						</html>						
-					';
-					
-					res.setHeader("Content-Type", "text/html"); 
-					res.writeHead(200); 
-					res.end(html); 
-				}
-			} 
-		); 
-		
-		server.listen(2000, "localhost"); 
-		trace( 'Server running at http://127.0.0.1:2000/' ); 
-	} 
+	function defaultHandler( req : Request , res : Response )
+	{
+		var url = req.path;
+		var indexHtml = '<!doctype html>' + Indexpage.getHtml(req.originalUrl);
+		res.send(indexHtml);
+	}
+	
+	public function render() return @dom 'dummyx';
+	
+	static function main()
+	{
+		new Server(2000);
+		trace('Server running on port 2000');
+	}	
+}
+
+class Indexpage extends React
+{
+	static public function getHtml(url:String) 
+	{
+		var content =  React.renderComponentToString(PageController.getReactDOM(url));
+	
+		return '			
+			<html>
+			<head>
+				<title>React Demo</title>
+			</head>
+			<body>
+				$content
+			</body>
+			<script src="/react.js" type="text/javascript"></script>
+			<script src="/client.js" type="text/javascript"></script>
+			</html>						
+		'
+		.replace('\t', '');
+	}
 	
 	public function render() return @dom 'dummyx';
 }
-
-/*
-
-*/
 

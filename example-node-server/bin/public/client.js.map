@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"client.js",
+"sourceRoot":"file://",
+"sources":["F:/react-hx/example-node-server/src/Client.hx","F:/react-hx/src/react/React.hx","F:/react-hx/src/react/ReactMacro.hx","F:/react-hx/example-node-server/src/PageController.hx","F:/react-hx/example-node-server/src/comps/About.hx","F:/react-hx/example-node-server/src/comps/Error404.hx","F:/react-hx/example-node-server/src/comps/Home.hx","F:/react-hx/example-node-server/src/comps/RenderMode.hx","F:/HaxeToolkit/haxe/std/haxe/Timer.hx"],
+"names":[],
+"mappings":";;;;;;;;cAkBO,HACP;CACC,WAAO;CAEK,cAAU;CACtB,EAAY,QAAW;EACtB;EACA;;;cAMY,HACd;CACC,WAAO;CACP,AACC,AAA2B,AAC1B;;gBC9BF,FCsDe;CAAe,AAAe;;;;QFpBvC,GAAkB;EEoCL;;;;6BCjEN,fACd;CACC,WAAO,TAAM;CACL,KAAO;KAET;ED4Da;KC3Db;ED2Da;;;;;wBDtEnB,VCsDe;CAAe,AAAe;;;;QCtCvC,GAAkB;EDsDL;;;;;qBDtEnB,PCsDe;CAAe,AAAe;;;;QEnDvC,GAEN;EFiEmB;;;;wBDtEnB,VCsDe;CAAe,AAAe;;;;QGnDvC,GAEN;EHiEmB;;;;oBDtEnB,NCsDe;CAAe,AAAe;;;;QInDvC,GAEN;EJiEmB;;;mBKpErB;CAEa,AAFb,EAEa;;0BNJX,ZCsDe;CAAe,AAAe;;;;iBKjD9B,NAChB;EADgB;EAGd,aAAU,ZAAY,QAAa;CAAe,YAAc,AAAC,VAAW,DAAE;;EACvE,WAAa,AAAC,VAAW;EAG1B,WAAc;;QAGf,GAEN;ELqDmB;;;;aMlBb,KAA6B;CAQzB;CACT,EAAa,FAAY,UAAW;;CAAS;;;MAexC,KAAgB;EAErB,AAAI,EAAM,HACT;EAMQ,DAAc;EAEvB,CAAK;;KAmBQ,MAAe;;;AN5EH,GAAU;;;;;;;;;;;;AAAV,GAAU;;;;;;;;;;;;AAAV,GAAU;;;;;;;;;;;;AAAV,GAAU;;;;;;;;;;;;AAAV,GAAU;;;;;;;;;;;;AAAV,GAAU;;;;;;;;;;;;;;;"
+}
