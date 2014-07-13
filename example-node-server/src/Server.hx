@@ -20,7 +20,7 @@ class Server extends React
 			req:NodeHttpServerReq, res:NodeHttpServerResp) 
 			{
 				// Asking for a javascript file?
-				var fullpath =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');
+				var fullpath =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');				
 				if (fullpath.endsWith('.js') && FileSystem.exists(fullpath))
 				{
 					var content = File.getContent(fullpath);
@@ -43,7 +43,7 @@ class Server extends React
 						<body>
 							$content
 						</body>
-						< script src="/react.js" type="text/javascript"></script>
+						<script src="/react.js" type="text/javascript"></script>
 						<script src="/client.js" type="text/javascript"></script>
 						</html>						
 					';

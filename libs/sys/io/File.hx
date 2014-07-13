@@ -51,6 +51,7 @@ class File
 	public static function saveContent( path : String, content : String ) : Void
 	{
 		Node.fs.writeFileSync(path, content);
+		//Node.fs.writeFile(path, content, UTF8_ENCODING);
 	}
 	
 	public static function write( path : String, ?binary : Bool ) : FileOutput

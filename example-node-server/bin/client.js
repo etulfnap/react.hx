@@ -95,5 +95,6 @@ RenderMode =
 						c.statics = statics;
 						return c;
 					})());
+Client.__meta__ = { fields : { render : { keep : null}}};
 Client.main();
 })();

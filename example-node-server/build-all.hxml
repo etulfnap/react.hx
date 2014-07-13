@@ -7,7 +7,7 @@
 -main Server 
 --remap sys:sys
 
--cmd neko add-require-react.n bin/server.js
+-cmd node add-require.js
 
 --next
 
@@ -16,3 +16,5 @@
 -cp src
 -cp ../src
 -cp ../libs
+
+	

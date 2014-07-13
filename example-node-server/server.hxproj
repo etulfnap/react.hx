@@ -26,7 +26,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="Server" />
     <option enabledebug="False" />
-    <option additional="--remap sys:sys" />
+    <option additional="--remap sys:sys&#xA;-dce std" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -43,7 +43,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">neko add-require-react.n bin/server.js</postBuildCommand>
+  <postBuildCommand alwaysRun="False">node add-require.js</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
