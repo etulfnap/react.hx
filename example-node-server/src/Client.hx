@@ -21,5 +21,7 @@ class Client extends React
 		);
 		//}
 	}		
+	
 	public function render() return @dom 'dummy';
+
 }

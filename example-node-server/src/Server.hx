@@ -8,24 +8,25 @@ import sys.io.File;
 import react.React;
 import Components;
 using StringTools;
-
+using StrTools;
 
 class Server extends React 
 { 
+	
 	public static function main() 
-	{ 		
+	{ 
 		var server = Node.http.createServer( function( 
 		
 			req:NodeHttpServerReq, res:NodeHttpServerResp) 
 			{
-				// Asking for a static .js file?
-				var staticFilename =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');
-				if (FileSystem.exists(staticFilename) && !FileSystem.isDirectory(staticFilename))
+				// Asking for a javascript file?
+				var fullpath =  Node.__dirname + '/' + StrTools.ltrimString(req.url, '/').replace('\\', '/');
+				if (fullpath.endsWith('.js') && FileSystem.exists(fullpath))
 				{
-					var staticContent = File.getContent(staticFilename);
+					var content = File.getContent(fullpath);
 					res.setHeader("Content-Type", "text/javascript"); 
 					res.writeHead(200); 
-					res.end(staticContent); 					
+					res.end(content); 					
 				}
 				
 				// Anything else - here just server index page...
@@ -40,10 +41,10 @@ class Server extends React
 							<title>React Demo</title>
 						</head>
 						<body>
-						$content
+							$content
 						</body>
-						<script src="http://localhost:2000/react.js" type="text/javascript"></script>
-						<script src="http://localhost:2000/client.js" type="text/javascript"></script>
+						< script src="/react.js" type="text/javascript"></script>
+						<script src="/client.js" type="text/javascript"></script>
 						</html>						
 					';
 					

@@ -59,7 +59,7 @@ haxe.Timer.prototype = {
 	run: function() {
 	}
 };
-Client = 
+Client = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in Client)
@@ -71,7 +71,7 @@ Client =
 						c.statics = statics;
 						return c;
 					})());
-Content = 
+Content = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in Content)
@@ -83,7 +83,7 @@ Content =
 						c.statics = statics;
 						return c;
 					})());
-RenderMode = 
+RenderMode = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in RenderMode)

@@ -9,6 +9,7 @@ using DateTools;
 class Components
 { }
 
+
 class Content extends React
 {
 	public function render() 
@@ -24,7 +25,8 @@ class RenderMode extends React
 	{
 		#if (!nodejs) 
 			new Timer(1000).run = function() { this.setState( { rendermode: 'Client ' + this.count++ } ); };		
-		#end		
+		#end	
+		
 		return {rendermode: 'Server' };
 	}
 	

@@ -34,7 +34,7 @@ class ReactMacro {
 			access: [AStatic, APublic],
 			kind: FFun({
 				args : [],
-				expr : macro untyped $i{cls} = __js__('
+				expr : macro untyped $i { cls } = __js__('				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in $cls)

@@ -21,4 +21,6 @@ class StrTools
 	{
 		return s.ltrimString(remove).rtrimString(remove);
 	}	
+	
+	inline static public function has(s:String, lookfor:String) return (s.indexOf(lookfor) > -1);
 }
