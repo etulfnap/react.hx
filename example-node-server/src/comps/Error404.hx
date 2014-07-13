@@ -9,6 +9,11 @@ class Error404 extends React
 {
 	public function render() 
 	{
-		return @dom '<strong>404: Sorry, this page can not be found!</strong>'; 
+		return @dom '
+			<div>
+				<h1>404</h1>				
+				<p>this page doesn\'t exist!</p>
+			</div>
+			'; 
 	}		
 }

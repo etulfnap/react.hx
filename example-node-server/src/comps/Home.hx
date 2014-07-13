@@ -9,6 +9,12 @@ class Home extends React
 {
 	public function render() 
 	{
-		return @dom '<div><p>Welcome home! Rendering mode: <comps.RenderMode /></p><img src="/image.png" /></div>'; 
+		return @dom '
+			<div>
+				<h1>Home</h1>
+				<p>Rendering mode: <comps.RenderMode /></p>
+				<img src="/image.png" />
+			</div>
+			'; 
 	}		
 }

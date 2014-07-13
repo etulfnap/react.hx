@@ -2,6 +2,7 @@ import comps.Home;
 import comps.About;
 import comps.Error404;
 import comps.RenderMode;
+import controller.PageController;
 import js.npm.connect.Static;
 import js.npm.Express;
 import js.npm.express.*;
@@ -47,7 +48,16 @@ class Indexpage extends React
 				<title>React Demo</title>
 			</head>
 			<body>
-				$content
+				<ul>
+					<li><a href="/" rel="pushstate">home</a></li>
+					<li><a href="/about" rel="pushstate">about</a></li>
+					<li><a href="/about" >about (not pushstate)</a></li>
+					<li><a href="/x/y/z" rel="pushstate">non-existing page (404)</a></li>					
+				</ul>
+				<hr />
+				<div id="content">
+					$content
+				</div>
 			</body>
 			<script src="/react.js" type="text/javascript"></script>
 			<script src="/client.js" type="text/javascript"></script>

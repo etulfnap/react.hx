@@ -10,27 +10,6 @@ var EReg = function(r,opt) {
 	opt = opt.split("u").join("");
 	this.r = new RegExp(r,opt);
 };
-var PageController = function() { };
-PageController.getReactDOM = function(url) {
-	console.log("url: " + url);
-	switch(url) {
-	case "/":
-		return /** @jsx React.DOM */ comps.Home(null );
-	case "/about":
-		return /** @jsx React.DOM */ comps.About(null );
-	default:
-		return /** @jsx React.DOM */ comps.Error404(null );
-	}
-};
-PageController.create = function(arg) {
-	return PageController(arg);
-};
-PageController.__super__ = React;
-PageController.prototype = $extend(React.prototype,{
-	render: function() {
-		return /** @jsx React.DOM */ dummyx;
-	}
-});
 var Server = function(port) {
 	var server = new (Express__4||require("express"))();
 	server["use"]((function($this) {
@@ -58,8 +37,8 @@ Server.prototype = {
 };
 var Indexpage = function() { };
 Indexpage.getHtml = function(url) {
-	var content = React.renderComponentToString(PageController.getReactDOM(url));
-	return StringTools.replace("\t\t\t\n\t\t\t<html>\n\t\t\t<head>\n\t\t\t\t<title>React Demo</title>\n\t\t\t</head>\n\t\t\t<body>\n\t\t\t\t" + content + "\n\t\t\t</body>\n\t\t\t<script src=\"/react.js\" type=\"text/javascript\"></script>\n\t\t\t<script src=\"/client.js\" type=\"text/javascript\"></script>\n\t\t\t</html>\t\t\t\t\t\t\n\t\t","\t","");
+	var content = React.renderComponentToString(controller.PageController.getReactDOM(url));
+	return StringTools.replace("\t\t\t\n\t\t\t<html>\n\t\t\t<head>\n\t\t\t\t<title>React Demo</title>\n\t\t\t</head>\n\t\t\t<body>\n\t\t\t\t<ul>\n\t\t\t\t\t<li><a href=\"/\" rel=\"pushstate\">home</a></li>\n\t\t\t\t\t<li><a href=\"/about\" rel=\"pushstate\">about</a></li>\n\t\t\t\t\t<li><a href=\"/about\" >about (not pushstate)</a></li>\n\t\t\t\t\t<li><a href=\"/x/y/z\" rel=\"pushstate\">non-existing page (404)</a></li>\t\t\t\t\t\n\t\t\t\t</ul>\n\t\t\t\t<hr />\n\t\t\t\t<div id=\"content\">\n\t\t\t\t\t" + content + "\n\t\t\t\t</div>\n\t\t\t</body>\n\t\t\t<script src=\"/react.js\" type=\"text/javascript\"></script>\n\t\t\t<script src=\"/client.js\" type=\"text/javascript\"></script>\n\t\t\t</html>\t\t\t\t\t\t\n\t\t","\t","");
 };
 Indexpage.create = function(arg) {
 	return Indexpage(arg);
@@ -82,7 +61,7 @@ comps.About.create = function(arg) {
 comps.About.__super__ = React;
 comps.About.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null, React.DOM.p(null, "This is the about page!"),React.DOM.img( {src:"/image.png"} ));
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "About"), " ", React.DOM.img( {src:"/image.png"} ), " " );
 	}
 });
 comps.Error404 = function() { };
@@ -92,7 +71,7 @@ comps.Error404.create = function(arg) {
 comps.Error404.__super__ = React;
 comps.Error404.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.strong(null, "404: Sorry, this page can not be found!");
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "404"), " ", React.DOM.p(null, "this page doesn't exist!"), " " );
 	}
 });
 comps.Home = function() { };
@@ -102,7 +81,7 @@ comps.Home.create = function(arg) {
 comps.Home.__super__ = React;
 comps.Home.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null, React.DOM.p(null, "Welcome home! Rendering mode: ", comps.RenderMode(null )),React.DOM.img( {src:"/image.png"} ));
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Home"), " ", React.DOM.p(null, "Rendering mode: ", comps.RenderMode(null )), " ", React.DOM.img( {src:"/image.png"} ), " " );
 	}
 });
 comps.RenderMode = function() {
@@ -116,10 +95,39 @@ comps.RenderMode.prototype = $extend(React.prototype,{
 	getInitialState: function() {
 		return { rendermode : "Server"};
 	}
+	,componentDidMount: function() {
+		console.log("Render mode.componentDidMount()");
+	}
+	,componentWillUnmount: function() {
+		console.log("Render mode.componentWillUnmount()");
+	}
 	,render: function() {
 		return /** @jsx React.DOM */ React.DOM.strong(null, this.state.rendermode);
 	}
 });
+var controller = {};
+controller.PageController = function() { };
+controller.PageController.getReactDOM = function(url) {
+	switch(url) {
+	case "/":
+		return /** @jsx React.DOM */ comps.Home(null );
+	case "/about":
+		return /** @jsx React.DOM */ comps.About(null );
+	default:
+		return /** @jsx React.DOM */ comps.Error404(null );
+	}
+};
+controller.PageController.create = function(arg) {
+	return controller.PageController(arg);
+};
+controller.PageController.__super__ = React;
+controller.PageController.prototype = $extend(React.prototype,{
+	render: function() {
+		return /** @jsx React.DOM */ dummyx;
+	}
+});
+var haxe = {};
+haxe.Timer = function() { };
 var js = {};
 js.Node = function() { };
 js.npm = {};
@@ -147,18 +155,6 @@ js.support._RegExp.RegExp_Impl_.toEReg = function(r) {
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-PageController = 				
-					React.createClass((function() {
-						var statics = {};
-						for(var field in PageController)
-							statics[field] = PageController[field];
-						var c = new PageController;
-						for(var field in PageController.prototype) {
-							c[field] = PageController.prototype[field];
-						}
-						c.statics = statics;
-						return c;
-					})());
 Indexpage = 				
 					React.createClass((function() {
 						var statics = {};
@@ -215,6 +211,18 @@ comps.RenderMode =
 						var c = new comps.RenderMode;
 						for(var field in comps.RenderMode.prototype) {
 							c[field] = comps.RenderMode.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
+controller.PageController = 				
+					React.createClass((function() {
+						var statics = {};
+						for(var field in controller.PageController)
+							statics[field] = controller.PageController[field];
+						var c = new controller.PageController;
+						for(var field in controller.PageController.prototype) {
+							c[field] = controller.PageController.prototype[field];
 						}
 						c.statics = statics;
 						return c;

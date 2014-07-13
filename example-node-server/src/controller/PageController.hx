@@ -1,4 +1,4 @@
-package ;
+package controller ;
 import react.React;
 
 /**
@@ -8,10 +8,9 @@ import react.React;
 class PageController extends React
 {
 	// Static, because React doesn't like instance method here... Strange!
-	//public function new() {}
 	static public function getReactDOM(url:String)
 	{
-		trace('url: $url');
+		//trace('url: $url');
 		return  switch url
 		{
 			case '/': @dom "<comps.Home />";

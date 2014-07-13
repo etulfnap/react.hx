@@ -9,6 +9,11 @@ class About extends React
 {
 	public function render() 
 	{
-		return @dom '<div><p>This is the about page!</p><img src="/image.png" /></div>'; 
+		return @dom '
+			<div>
+				<h1>About</h1>				
+				<img src="/image.png" />
+			</div>
+			'; 
 	}		
 }
