@@ -17,7 +17,6 @@
   <classpaths>
     <class path="src" />
     <class path="..\libs" />
-    <class path="..\src" />
     <class path="..\lib-haxe-js-kit" />
   </classpaths>
   <!-- Build options -->

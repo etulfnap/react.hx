@@ -96,10 +96,8 @@ comps.RenderMode.prototype = $extend(React.prototype,{
 		return { rendermode : "Server"};
 	}
 	,componentDidMount: function() {
-		console.log("Render mode.componentDidMount()");
 	}
 	,componentWillUnmount: function() {
-		console.log("Render mode.componentWillUnmount()");
 	}
 	,render: function() {
 		return /** @jsx React.DOM */ React.DOM.strong(null, this.state.rendermode);

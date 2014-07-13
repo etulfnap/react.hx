@@ -1,7 +1,7 @@
 
 -cp src 
 -cp ../libs 
--cp ../src 
+-cp ../lib-haxe-js-kit
 -js bin/server.js 
 -D nodejs 
 -main Server 
@@ -11,10 +11,10 @@
 
 --next
 
--js bin/client.js
+-js bin/public/client.js
 -main Client
 -cp src
--cp ../src
 -cp ../libs
+-D embed_js
 
 	
