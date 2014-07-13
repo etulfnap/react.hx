@@ -21,7 +21,6 @@ class RenderMode extends React
 		#if (!nodejs) 
 			if (this.timer == null) this.timer = new Timer(1000);  
 			timer.run = function() { this.setState( { rendermode: 'Client ' + ++this.count } ); };			
-			//return { rendermode: 'Client ' + this.count };
 			this.setState( { rendermode: 'Client ' + this.count } );
 		#end			
 	}

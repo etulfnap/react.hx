@@ -246,5 +246,3 @@ js.Node.clearTimeout = clearTimeout;
 js.Node.clearInterval = clearInterval;
 Server.main();
 })();
-
-//# sourceMappingURL=server.js.map
