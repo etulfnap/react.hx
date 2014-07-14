@@ -1,6 +1,8 @@
 package tink.core;
 
-abstract Callback<T>(T->Void) from (T->Void) {
+//TODO: To work around #2881 the abstracts are declared over Null. Remove this when no longer necessary.
+
+abstract Callback<T>(Null<T->Void>) from (T->Void) {
 	
 	inline function new(f) 
 		this = f;
@@ -10,7 +12,7 @@ abstract Callback<T>(T->Void) from (T->Void) {
 		
 	@:from static inline function fromNiladic<A>(f:Void->Void):Callback<A> 
 		return new Callback(function (r) f());
-		
+	
 	@:from static function fromMany<A>(callbacks:Array<Callback<A>>):Callback<A> 
 		return
 			function (v:A) 
@@ -18,7 +20,7 @@ abstract Callback<T>(T->Void) from (T->Void) {
 					callback.invoke(v);
 }
 
-abstract CallbackLink(Void->Void) {
+abstract CallbackLink(Null<Void->Void>) {
 	
 	inline function new(link:Void->Void) 
 		this = link;
@@ -59,7 +61,7 @@ abstract CallbackList<T>(Array<Cell<T>>) {
 	
 	public var length(get, never):Int;
 	
-	public inline function new():Void
+	inline public function new():Void
 		this = [];
 	
 	inline function get_length():Int 

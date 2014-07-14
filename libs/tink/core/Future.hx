@@ -1,12 +1,13 @@
 package tink.core;
 
 import tink.core.Callback;
-import tink.core.Outcome;
 import haxe.ds.Option;
+
+using tink.core.Outcome;
 
 abstract Future<T>(Callback<T>->CallbackLink) {
 
-	public inline function new(f:Callback<T>->CallbackLink) this = f;	
+	public function new(f:Callback<T>->CallbackLink) this = f;	
 		
 	public inline function handle(callback:Callback<T>):CallbackLink //TODO: consider null-case
 		return (this)(callback);
@@ -16,7 +17,7 @@ abstract Future<T>(Callback<T>->CallbackLink) {
 			self = this;
 		return new Future(function (cb:Callback<T>) {
 			if (self != null) {
-				handle(self, op.trigger);
+				handle(op.trigger);
 				self = null;				
 			}
 			return op.asFuture().handle(cb);
@@ -25,7 +26,7 @@ abstract Future<T>(Callback<T>->CallbackLink) {
 	
 	public function first(other:Future<T>):Future<T>
 		return Future.async(function (cb:T->Void) {
-			handle(this, cb);
+			handle(cb);
 			other.handle(cb);
 		});
 	
@@ -57,7 +58,7 @@ abstract Future<T>(Callback<T>->CallbackLink) {
 			return ret;
 		});
 	
-	@:from static inline function fromTrigger<A>(trigger:FutureTrigger<A>):Future<A> 
+	@:from inline static function fromTrigger<A>(trigger:FutureTrigger<A>):Future<A> 
 		return trigger.asFuture();
 	
 	static public function ofMany<A>(futures:Array<Future<A>>, ?gather:Bool = true) {
@@ -118,16 +119,10 @@ abstract Future<T>(Callback<T>->CallbackLink) {
 		});
 		
 	@:noCompletion @:op(a >> b) static public function _tryFailingMap<D, F, R>(f:Surprise<D, F>, map:D->Outcome<R, F>)
-		return f.map(function (o) return switch o {
-			case Success(d): map(d);
-			case Failure(f): Failure(f);
-		});
+		return f.map(function (o) return o.flatMap(map));
 
 	@:noCompletion @:op(a >> b) static public function _tryMap<D, F, R>(f:Surprise<D, F>, map:D->R)
-		return f.map(function (o) return switch o {
-			case Success(d): Success(map(d));
-			case Failure(f): Failure(f);
-		});		
+		return f.map(function (o) return o.map(map));		
 	
 	@:noCompletion @:op(a >> b) static public function _flatMap<T, R>(f:Future<T>, map:T->Future<R>)
 		return f.flatMap(map);
