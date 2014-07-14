@@ -45,9 +45,12 @@ class Indexpage extends React
 		return '			
 			<html>
 			<head>
-				<title>React Demo</title>
+				<title>Isomorphic Demo</title>
+				<link rel="stylesheet" type="text/css" href="/style.css" />
 			</head>
 			<body>
+				<p>This React/PushState demo shows the use of isomorphism - using the same React code both on the server and the client. 
+				<br />Please note that a 2 seconds delay is used before ANY client side changes are invoked. This makes it easier  to observer the serverside and clientside rendering. Make sure to open the browser console for info about what\'s going on</p>
 				<ul>
 					<li><a href="/" rel="pushstate">home</a></li>
 					<li><a href="/about" rel="pushstate">about</a></li>

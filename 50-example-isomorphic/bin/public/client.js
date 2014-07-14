@@ -12,15 +12,15 @@ Client.main = function() {
 	pushstate.PushState.addEventListener(null,function(url) {
 		var pagemode;
 		if(++Client.stateChangeCount > 1) pagemode = "client"; else pagemode = "server";
-		console.log("(PushState notified about url activatity. Mode: " + pagemode + " Url: " + url + ")");
+		console.log("- PushState notified about url activatity. Mode: " + pagemode + " Url: " + url);
 		if(Client.prevUrl != null) {
 			if(Client.prevUrl == url) return;
 		}
 		Client.prevUrl = url;
-		console.log("(Wait 2 seconds until client acts, just to make it possible to observer what's going on...)");
+		console.log("- Wait 2 seconds until client acts, just to make it possible to observer what's going on...");
 		if(Client.timer != null) Client.timer.stop();
 		Client.timer = haxe.Timer.delay(function() {
-			console.log("Client rendering - the virtual dom should prevent any reloading of unchanged dom elements. url: " + url);
+			console.log("Client rendering - the React Virtual DOM should prevent any reloading of unchanged DOM elements. url: " + url);
 			React.renderComponent(controller.PageController.getReactDOM(url),window.document.getElementById("content"));
 		},2000);
 	});
@@ -369,5 +369,3 @@ js.JQuery = q;
 Client.stateChangeCount = 0;
 Client.main();
 })();
-
-//# sourceMappingURL=client.js.map

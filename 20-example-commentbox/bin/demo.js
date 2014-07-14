@@ -1279,7 +1279,7 @@ markdown.TagState.prototype = {
 function $iterator(o) { if( o instanceof Array ) return function() { return HxOverrides.iter(o); }; return typeof(o.iterator) == 'function' ? $bind(o,o.iterator) : o.iterator; }
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
-CommentBox = 
+CommentBox = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in CommentBox)
@@ -1291,7 +1291,7 @@ CommentBox =
 						c.statics = statics;
 						return c;
 					})());
-CommentList = 
+CommentList = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in CommentList)
@@ -1303,7 +1303,7 @@ CommentList =
 						c.statics = statics;
 						return c;
 					})());
-CommentForm = 
+CommentForm = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in CommentForm)
@@ -1315,7 +1315,7 @@ CommentForm =
 						c.statics = statics;
 						return c;
 					})());
-Comment = 
+Comment = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in Comment)

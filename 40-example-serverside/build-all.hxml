@@ -1,5 +1,6 @@
 -main Server
 -cp src 
+-cp ../libs
 -cp ../lib-haxe-js-kit 
 -js bin/server.js 
 

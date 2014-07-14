@@ -18,7 +18,7 @@ App.prototype = $extend(React.prototype,{
 		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Hello ", this.props.greeter,"!"), " " );
 	}
 });
-App = 
+App = 				
 					React.createClass((function() {
 						var statics = {};
 						for(var field in App)

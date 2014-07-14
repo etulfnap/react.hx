@@ -29,16 +29,16 @@ class Client extends React
 		PushState.addEventListener(function (url) 
 		{		
 			var pagemode = (++stateChangeCount > 1)? "client" : "server";
-			trace('(PushState notified about url activatity. Mode: $pagemode Url: $url)');
+			trace('- PushState notified about url activatity. Mode: $pagemode Url: $url');
 			
 			if (prevUrl != null) if (prevUrl == url) return;
 			prevUrl = url;
 			
-			trace('(Wait 2 seconds until client acts, just to make it possible to observer what\'s going on...)');
+			trace('- Wait 2 seconds until client acts, just to make it possible to observer what\'s going on...');
 			
 			if (timer != null) timer.stop();		
 			timer = Timer.delay(function() {
-				trace('Client rendering - the virtual dom should prevent any reloading of unchanged dom elements. url: $url');
+				trace('Client rendering - the React Virtual DOM should prevent any reloading of unchanged DOM elements. url: $url');
 				React.renderComponent(			
 					PageController.getReactDOM(url),
 					 js.Browser.document.getElementById('content')
