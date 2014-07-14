@@ -41,9 +41,6 @@ class Greeting extends React
 				<p>Hello <strong>{this.props.greeter}</strong>!</p>
 				<img src="reacthx.png" />
 			</div>
-			<p>
-				Hello, <i>{this.props.greeter}!</i>
-			</p>
 		';
 	}		
 }
