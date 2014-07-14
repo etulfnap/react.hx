@@ -21,7 +21,7 @@ class App extends React
 	{
 		return @dom '
 			<div>
-				<h1>Hello {this.props.greeter}!</h1>
+				<p>Hello <strong>{this.props.greeter}</strong>!</p>
 			</div>
 		';
 	}	

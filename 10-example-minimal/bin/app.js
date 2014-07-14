@@ -15,7 +15,7 @@ App.create = function(arg) {
 App.__super__ = React;
 App.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Hello ", this.props.greeter,"!"), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Hello ", React.DOM.strong(null, this.props.greeter),"!"), " " );
 	}
 });
 App = 				
