@@ -22,6 +22,7 @@ class App extends React
 		return @dom '
 			<div>
 				<p>Hello <strong>{this.props.greeter}</strong>!</p>
+				<img src="reacthx.png" />
 			</div>
 		';
 	}	
