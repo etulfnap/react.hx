@@ -66,6 +66,9 @@ class Indexpage extends React
 		.replace('\t', '');
 	}
 	
-	public function render() return @dom 'dummyx';
+	
+	// This render() method is only needed because this class extends React. 
+	// When figured out how to invoke JSX trnasformation directly, this won't be needed...
+	public function render() return @dom 'dummy';
 }
 

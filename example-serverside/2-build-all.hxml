@@ -1,0 +1,6 @@
+-main Server
+-cp src 
+-cp ../lib-haxe-js-kit 
+-js bin/server.js 
+
+-cmd node add-require.js
