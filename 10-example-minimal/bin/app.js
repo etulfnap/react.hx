@@ -7,7 +7,11 @@ function $extend(from, fields) {
 }
 var App = function() { };
 App.main = function() {
+<<<<<<< HEAD
 	React.renderComponent(/** @jsx React.DOM */ App( {greeter:"world"} ),window.document.body);
+=======
+	React.renderComponent(/** @jsx React.DOM */ React.DOM.div(null,  " ", Greeting( {greeter:"world"} ), " " ),window.document.body);
+>>>>>>> cf90e004793e0cc982461bdfc8501f94d599e6da
 };
 App.create = function(arg) {
 	return App(arg);
@@ -15,7 +19,21 @@ App.create = function(arg) {
 App.__super__ = React;
 App.prototype = $extend(React.prototype,{
 	render: function() {
+<<<<<<< HEAD
 		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Hello ", React.DOM.strong(null, this.props.greeter),"!"), " ", React.DOM.img( {src:"reacthx.png"} ), " " );
+=======
+		return /** @jsx React.DOM */ dummy;
+	}
+});
+var Greeting = function() { };
+Greeting.create = function(arg) {
+	return Greeting(arg);
+};
+Greeting.__super__ = React;
+Greeting.prototype = $extend(React.prototype,{
+	render: function() {
+		return /** @jsx React.DOM */ React.DOM.p(null,  " Hello, ", React.DOM.i(null, this.props.greeter,"!"), " " );
+>>>>>>> cf90e004793e0cc982461bdfc8501f94d599e6da
 	}
 });
 App = 				
@@ -30,5 +48,20 @@ App =
 						c.statics = statics;
 						return c;
 					})());
+<<<<<<< HEAD
+=======
+Greeting = 				
+					React.createClass((function() {
+						var statics = {};
+						for(var field in Greeting)
+							statics[field] = Greeting[field];
+						var c = new Greeting;
+						for(var field in Greeting.prototype) {
+							c[field] = Greeting.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
+>>>>>>> cf90e004793e0cc982461bdfc8501f94d599e6da
 App.main();
 })();
