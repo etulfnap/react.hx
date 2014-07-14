@@ -104,7 +104,7 @@ class ReactMacro {
 		var out = proc.stdout.readAll().toString();
 		var err = proc.stderr.readAll().toString();
 		proc.close();
-		if ("" != err) throw err;
+		if ("" != err) throw 'JSX transformation error -  the JSX xml might not be correctly formatted';
 		
 		// Hack to allow React classes in packages (2)
 		for (i in 0...matchesWithPackage.length) out = out.replace(matchesWithoutPackage[i], matchesWithPackage[i]);
