@@ -7,7 +7,7 @@ class Server {
 		var server = js.node.Http.createServer(function(req,res){
 			var url = req.url;
 			
-			var content = new Content().getContentHtmlFromJSX(url);			
+			var content = Content.getContentHtmlFromJSX(url);			
 			
 			var html = '
 			<!doctype html>
@@ -37,9 +37,9 @@ class Server {
 
 class Content extends React
 {
-	public function new() { }
-
-	public function getContentHtmlFromJSX(url:String)
+	
+	// This must be a static method, otherwise React will complain on runtime...
+	static public function getContentHtmlFromJSX(url:String)
 	{
 		var content = switch url {			
 			

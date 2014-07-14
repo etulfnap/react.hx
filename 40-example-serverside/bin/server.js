@@ -10,32 +10,31 @@ var Server = function() { };
 Server.main = function() {
 	var server = (Http__0||require("http")).createServer(function(req,res) {
 		var url = req.url;
-		var content = new Content().getContentHtmlFromJSX(url);
+		var content = Content.getContentHtmlFromJSX(url);
 		var html = "\n\t\t\t<!doctype html>\n\t\t\t<html>\n\t\t\t\t<head>\n\t\t\t\t</head>\n\t\t\t\t<body>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"/\">Home</a></li>\n\t\t\t\t\t\t<li><a href=\"/foo\">Another page 1</a></li>\n\t\t\t\t\t\t<li><a href=\"/bar/buzz\">Another page 2</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<hr />\n\t\t\t\t\t" + content + "\n\t\t\t\t</body>\n\t\t\t</html>\n\t\t\t";
 		res.end(html);
 	});
 	server.listen(2000);
 	console.log("Server running on port 2000");
 };
-var Content = function() {
+var Content = function() { };
+Content.getContentHtmlFromJSX = function(url) {
+	var content;
+	switch(url) {
+	case "/":case "/home":case "/index":
+		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Home page"), " " );
+		break;
+	default:
+		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Another page"), " ", UrlDisplay( {url:url} ), " " );
+	}
+	return React.renderComponentToString(content);
 };
 Content.create = function(arg) {
 	return Content(arg);
 };
 Content.__super__ = React;
 Content.prototype = $extend(React.prototype,{
-	getContentHtmlFromJSX: function(url) {
-		var content;
-		switch(url) {
-		case "/":case "/home":case "/index":
-			content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Home page"), " " );
-			break;
-		default:
-			content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Another page"), " ", UrlDisplay( {url:url} ), " " );
-		}
-		return React.renderComponentToString(content);
-	}
-	,render: function() {
+	render: function() {
 		return /** @jsx React.DOM */ dummy;
 	}
 });
