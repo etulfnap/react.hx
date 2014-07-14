@@ -8,14 +8,17 @@ class App extends React
 	{
 		// Here, the @dom metadata will invoke the React jsx magic, that will
 		// transform the xml into valid React javascript directives.
-		// The greeter attribute will be passed into the Greeting class as a React props parameter .
-		// Finally, the resulting Greeting  component will be injected in the js.Browser.document.body element:
+		// The greeter attribute will be passed into the Greeting component as a React props parameter .
+		// Finally, the resulting Greeting  component and its surrounding div element will be injected in the js.Browser.document.body element:
 		React.renderComponent(
+			// perform the JSX transformation magic here:
 			@dom '
 				<div>
 					<Greeting greeter="world" />
 				</div>	
 				',
+				
+			// Injecti the result into the the DOM element of your choice here:
 			 js.Browser.document.body
 		);
 		// Above, we apply the rendered elements to the body (js.Browser.document.body),
