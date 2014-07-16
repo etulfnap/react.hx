@@ -1,6 +1,14 @@
 # react.hx
 
-ReactJS (http://facebook.github.io/react/) is a 
+![React.hx](/master/react-hx.png?raw=true "React.hx")
+
+React.hx is a Haxe extern implementation of ReactJS created by Franco Ponticelli (https://github.com/fponticelli)
+Check out the ReactJS site (http://reactjs.org) for great information and tutorials!
+
+## Status: Proof of concept
+
+Note that this is a "proof of concept" with the puprose of figuring out how to match ReactJS with the great Haxe toolset.
+Don't expect any production ready code here!
 
 ## Dependencies
 
@@ -18,4 +26,3 @@ All Haxe libraries neede are included in the /libs folder, so there should be no
 
 Have a look in the examples folders. There you can find more information about how to compile and run.
 
-https://github.com/cambiata/react.hx/blob/master/react-hx.png
