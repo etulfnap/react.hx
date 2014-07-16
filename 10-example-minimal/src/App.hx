@@ -19,7 +19,7 @@ class App extends React
 				',
 				
 			// Injecti the result into the the DOM element of your choice here:
-			 js.Browser.document.getElementById
+			 js.Browser.document.body
 		);
 		// Above, we apply the rendered elements to the body (js.Browser.document.body),
 		// but we could apply it to any DOM element by using something like js.Browser.document.getElementById('content')

@@ -12,6 +12,35 @@ Core ReactJS concepts:
 
 Have a look at the ReactJS site (http://reactjs.org) for great information and tutorials!
 
+Javascript example:
+```
+/** @jsx React.DOM */
+var HelloMessage = React.createClass({
+	
+	render: function() {
+		return <div>Hello {this.props.name}</div>;
+	}
+});
+
+React.renderComponent(<HelloMessage name="John" />, window.document.body);
+```
+
+The same in Haxe:
+```
+import react.React;
+class HelloMessage extends React {	
+	
+	public function render() return @dom '<div>Hello {this.props.name}</div>';
+	
+	static function main() {
+		React.renderComponent(
+			@dom '<HelloMessage name="John" /></div>',
+			js.Browser.document.body
+		);
+	}	
+}
+```
+	
 ## Status: Proof of concept
 
 Note that this is a "proof of concept" with the puprose of figuring out how to match ReactJS with the great Haxe toolset.
@@ -27,8 +56,12 @@ For these examples to work, you need the following
 
 ### Haxe libraries
 
-All Haxe libraries neede are included in the /libs folder, so there should be no need for haxlib installations.
-
+All Haxe libraries neede for the examples are included in the /libs folder, so there should be no need for haxlib installations. The following libraries are included:
+- React (Franco Ponticelli, https://github.com/fponticelli/react.hx)
+- Tinkerbell (tink_core, tink_macro, Juraj Kirschheim, https://github.com/haxetink)
+- jQueryExtern (Andy Li, https://github.com/andyli/jQueryExternForHaxe)
+- Pushstate (Jason O'Neil, https://github.com/jasononeil/hxpushstate) - sligthly modified to make use of jQuerExtern instead of js.JQuery.
+- Haxe-js-kit (Clément Charmet, https://github.com/clemos/haxe-js-kit)
 
 ## Examples
 
