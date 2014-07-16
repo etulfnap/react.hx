@@ -12,11 +12,10 @@ Core ReactJS concepts:
 
 Have a look at the ReactJS site (http://reactjs.org) for great information and tutorials!
 
-Javascript example:
+This is a minimalistic Javascript example from the http://facebook.github.io/react/index.html page:
 ```
 /** @jsx React.DOM */
 var HelloMessage = React.createClass({
-	
 	render: function() {
 		return <div>Hello {this.props.name}</div>;
 	}
@@ -25,13 +24,11 @@ var HelloMessage = React.createClass({
 React.renderComponent(<HelloMessage name="John" />, window.document.body);
 ```
 
-The same in Haxe:
+This is how the same looks when coded in Haxe:
 ```
 import react.React;
 class HelloMessage extends React {	
-	
 	public function render() return @dom '<div>Hello {this.props.name}</div>';
-	
 	static function main() {
 		React.renderComponent(
 			@dom '<HelloMessage name="John" /></div>',
