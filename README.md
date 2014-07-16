@@ -32,7 +32,7 @@ class HelloMessage extends React {
 		return @dom '<div>Hello {this.props.name}</div>';
 	}
 	static function main() {
-		React.renderComponent(@dom '<HelloMessage name="John" /></div>', js.Browser.document.body);
+		React.renderComponent(@dom '<HelloMessage name="John" />', js.Browser.document.body);
 	}	
 }
 ```
