@@ -15,7 +15,7 @@ App.create = function(arg) {
 App.__super__ = React;
 App.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ dummy;
+		return /** @jsx React.DOM */ React.DOM.noscript(null );
 	}
 });
 var Greeting = function() { };
@@ -25,7 +25,7 @@ Greeting.create = function(arg) {
 Greeting.__super__ = React;
 Greeting.prototype = $extend(React.prototype,{
 	render: function() {
-		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Hello ", React.DOM.strong(null, this.props.greeter),"!"), " ", React.DOM.img( {src:"reacthx.png"} ), " " );
+		return /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.p(null, "Hello ", React.DOM.strong(null, this.props.greeter),"!"), " " );
 	}
 });
 App = 				

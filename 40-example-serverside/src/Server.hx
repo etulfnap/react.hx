@@ -17,8 +17,8 @@ class Server {
 				<body>
 					<ul>
 						<li><a href="/">Home</a></li>
-						<li><a href="/foo">Another page 1</a></li>
-						<li><a href="/bar/buzz">Another page 2</a></li>
+						<li><a href="/foo">Page 1</a></li>
+						<li><a href="/bar/buzz">Page 2</a></li>
 					</ul>
 					<hr />
 					$content
@@ -45,12 +45,12 @@ class Content extends React
 			
 			case '/' | '/home' | '/index' : @dom '
 				<div>
-					<h1>Home page</h1>
+					<Home />
 				</div>';
 			
 			case _: @dom '
 				<div>
-					<h1>Another page</h1>
+					<Another  />
 					<UrlDisplay url={url} />
 				</div>
 				';
@@ -62,6 +62,20 @@ class Content extends React
 	// This render() method is only needed because this class extends React. 
 	// When figured out how to invoke JSX trnasformation directly, this won't be needed...
 	public function render() return @dom 'dummy';
+}
+
+class Home extends React
+{
+	public function render() return @dom '
+		<h1>Home page</h1>
+	';
+}
+
+class Another extends React
+{
+	public function render() return @dom '
+		<h1>Another page</h1>
+	';	
 }
 
 class UrlDisplay extends React

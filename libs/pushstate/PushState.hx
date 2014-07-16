@@ -11,13 +11,8 @@
 
 package pushstate;
 
-#if detox
-	using Detox;
-#else 
-	import haxe.ds.Option;
-	import js.JQuery;
-	import js.JQuery.JQueryHelper.*;
-#end
+import haxe.ds.Option;
+import jQuery.JQuery;
 
 import js.Browser.window in win;
 import js.Browser.document in doc;
@@ -41,6 +36,7 @@ import pushstate.History;
 **/
 class PushState 
 {
+			
 	static var basePath:String;
 	static var preventers:Array<Preventer>;
 	static var listeners:Array<Listener>;
@@ -70,41 +66,22 @@ class PushState
 		PushState.basePath = basePath;
 
 		// Load on window.onload(), so that permanent URLs work
-		#if detox 
-			Detox.ready(function () {
-				// Trigger Events
-				handleOnPopState(null);
 
-				// Load when a <a href="#" rel="pushstate">PushState Link</a> is pressed
-				Detox.document.on("click", "a[rel=pushstate]", function (e) {
-					var link:DOMNode = cast e.target;
-					while (link.tagName() != "a" && link.parent() != null) {
-						link = link.parent();
-					}
-					if (link.tagName() == "a") {
-						push(link.attr("href"));
-						e.preventDefault();
-					}
-				});
-				
-				// Load when we get a window.onPopState() event
-				win.onpopstate=handleOnPopState;
-			});
-		#else 
-			J(win).ready(function (e) {
-				// Trigger Events
-				handleOnPopState(null);
+		new JQuery(win).ready(function () {
+			// Trigger Events
+			handleOnPopState(null);
 
-				// Load when a <a href="#" rel="pushstate">PushState Link</a> is pressed
-				J(doc.body).delegate("a[rel=pushstate]", "click", function (e) {
-					push(JTHIS.attr("href"));
-					e.preventDefault();
-				});
-				
-				// Load when we get a window.onPopState() event
-				win.onpopstate = handleOnPopState;
+			// Load when a <a href="#" rel="pushstate">PushState Link</a> is pressed
+			new JQuery(doc.body).delegate("a[rel=pushstate]", "click", function (e) {
+				//push(JTHIS.attr("href"));
+				push( untyped __js__("$(this)").attr("href"));
+				e.preventDefault();
 			});
-		#end
+			
+			// Load when we get a window.onPopState() event
+			win.onpopstate = handleOnPopState;
+		});
+
 	}
 
 	static function handleOnPopState(e:PopStateEvent) {

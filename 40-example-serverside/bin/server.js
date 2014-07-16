@@ -11,7 +11,7 @@ Server.main = function() {
 	var server = (Http__0||require("http")).createServer(function(req,res) {
 		var url = req.url;
 		var content = Content.getContentHtmlFromJSX(url);
-		var html = "\n\t\t\t<!doctype html>\n\t\t\t<html>\n\t\t\t\t<head>\n\t\t\t\t</head>\n\t\t\t\t<body>\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li><a href=\"/\">Home</a></li>\n\t\t\t\t\t\t<li><a href=\"/foo\">Another page 1</a></li>\n\t\t\t\t\t\t<li><a href=\"/bar/buzz\">Another page 2</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t\t<hr />\n\t\t\t\t\t" + content + "\n\t\t\t\t</body>\n\t\t\t</html>\n\t\t\t";
+		var html = "\r\n\t\t\t<!doctype html>\r\n\t\t\t<html>\r\n\t\t\t\t<head>\r\n\t\t\t\t</head>\r\n\t\t\t\t<body>\r\n\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t<li><a href=\"/\">Home</a></li>\r\n\t\t\t\t\t\t<li><a href=\"/foo\">Page 1</a></li>\r\n\t\t\t\t\t\t<li><a href=\"/bar/buzz\">Page 2</a></li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t\t<hr />\r\n\t\t\t\t\t" + content + "\r\n\t\t\t\t</body>\r\n\t\t\t</html>\r\n\t\t\t";
 		res.end(html);
 	});
 	server.listen(2000);
@@ -22,10 +22,10 @@ Content.getContentHtmlFromJSX = function(url) {
 	var content;
 	switch(url) {
 	case "/":case "/home":case "/index":
-		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Home page"), " " );
+		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", Home(null ), " " );
 		break;
 	default:
-		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", React.DOM.h1(null, "Another page"), " ", UrlDisplay( {url:url} ), " " );
+		content = /** @jsx React.DOM */ React.DOM.div(null,  " ", Another(null  ), " ", UrlDisplay( {url:url} ), " " );
 	}
 	return React.renderComponentToString(content);
 };
@@ -36,6 +36,26 @@ Content.__super__ = React;
 Content.prototype = $extend(React.prototype,{
 	render: function() {
 		return /** @jsx React.DOM */ dummy;
+	}
+});
+var Home = function() { };
+Home.create = function(arg) {
+	return Home(arg);
+};
+Home.__super__ = React;
+Home.prototype = $extend(React.prototype,{
+	render: function() {
+		return /** @jsx React.DOM */ React.DOM.h1(null, "Home page");
+	}
+});
+var Another = function() { };
+Another.create = function(arg) {
+	return Another(arg);
+};
+Another.__super__ = React;
+Another.prototype = $extend(React.prototype,{
+	render: function() {
+		return /** @jsx React.DOM */ React.DOM.h1(null, "Another page");
 	}
 });
 var UrlDisplay = function() { };
@@ -56,6 +76,30 @@ Content =
 						var c = new Content;
 						for(var field in Content.prototype) {
 							c[field] = Content.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
+Home = 				
+					React.createClass((function() {
+						var statics = {};
+						for(var field in Home)
+							statics[field] = Home[field];
+						var c = new Home;
+						for(var field in Home.prototype) {
+							c[field] = Home.prototype[field];
+						}
+						c.statics = statics;
+						return c;
+					})());
+Another = 				
+					React.createClass((function() {
+						var statics = {};
+						for(var field in Another)
+							statics[field] = Another[field];
+						var c = new Another;
+						for(var field in Another.prototype) {
+							c[field] = Another.prototype[field];
 						}
 						c.statics = statics;
 						return c;

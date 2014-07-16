@@ -1,21 +1,16 @@
 package react;
 
-import haxe.macro.Compiler;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 using tink.macro.Exprs;
 using StringTools;
 using Lambda;
 
-class ReactMacro 
-{
+class ReactMacro {
 	macro static public function build():Array<Field> 
 	{
-		if (Compiler.getDefine('js-flatten') == null) Context.warning('The compiler directive "-D js_flatten" should be used to allow React components in subpackages \n 	Also note that all uses of subpackage classes in JSX code must be referenced with full qualified class name, including the package path.', Context.currentPos());		
-		
 		var fields = Context.getBuildFields();
 		var cls    = Context.getLocalClass().toString();
-		cls = cls.replace('.', '_');
 
 		fields.map(function(field) {
 			if(field.name == 'new') {
@@ -91,20 +86,17 @@ class ReactMacro
 
 	static function createDom(code : String) 
 	{
-		// Check that node package "react-tools" is installed
-		// If running serverside, node package "react" is also needed
-		if (!sys.FileSystem.exists('node_modules/react-tools')) throw 'You must react-tools installed for the React JSX transformation. Run "npm install react react-tools" from an commandline with git access.';
+		if (!sys.FileSystem.exists('node_modules/react-tools')) Sys.command('npm', ['install', 'react-tools']);
+		code = '"/** @jsx React.DOM */ ' + code.substr(1, code.length - 2).replace('\\n', ' ').replace('\\t', '').replace(String.fromCharCode(13), '').replace('/ >', '/>').trim() + '"';
 		
-		// Add the comment block that the JSX tranformation needs, and do some cleanup
-		code = '"/** @jsx React.DOM */ ' + code.substr(1, code.length - 2).replace('\\n', ' ').replace('\\t', '').replace(String.fromCharCode(13), '').replace('/ >', '/>').trim() + '"';		
-		
-		// Rewrite subpackage dots to underlines, eg. comps.navigation.Menu to comps_navigation_Menu
-		// Requires compiler directive -D js-flatten!
+		// Hack to allow React classes in packages (1)
 		var r = ~/<([ ]*)([A-Za-z0-9.]{2,})([ \/\\])/g;
-		var matches = regexGetAllMatches(r, code).filter(function(s) return s.indexOf('.') != -1).map(function(s) return s.substr(1));	
-		matches.iter(function(match) code =code.replace(match, match.replace('.', '_')));
+		var matches = regexGetAllMatches(r, code);		
+		var matchesWithPackage = matches.filter(function(s) return s.indexOf('.') != -1).map(function(s) return s.substr(1));
+		var matchesWithoutPackage = matchesWithPackage.map(function(s) return s.substr(s.lastIndexOf('.')+1));
+		for (i in 0...matchesWithPackage.length) code = code.replace(matchesWithPackage[i], matchesWithoutPackage[i]);
+		//
 		
-		// Invoke the React JSX transformation
 		var n = 'process.stdout.write(require("react-tools").transform($code))',
 		proc = new sys.io.Process('node', []);
 		proc.stdin.writeString(n);
@@ -112,8 +104,11 @@ class ReactMacro
 		var out = proc.stdout.readAll().toString();
 		var err = proc.stderr.readAll().toString();
 		proc.close();
+		if ("" != err) throw 'JSX transformation error -  the JSX xml might not be correctly formatted';
 		
-		if ("" != err) throw 'JSX transformation error -  the JSX xml might not be correctly formatted \n $err';
+		// Hack to allow React classes in packages (2)
+		for (i in 0...matchesWithPackage.length) out = out.replace(matchesWithoutPackage[i], matchesWithPackage[i]);
+		//
 		
 		return out;
 	}

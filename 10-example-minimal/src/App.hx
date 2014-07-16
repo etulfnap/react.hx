@@ -29,7 +29,7 @@ class App extends React
 	//----------------------------------------------------------------
 	// This render() method is only needed because this class extends React to get hold of the @dom transformation magic.
 	// When figured out how to invoke JSX trnasformation directly, this won't be needed...
-	public function render() return @dom 'dummy';
+	public function render() return @dom '<noscript />';
 }
 
 class Greeting extends React
@@ -38,8 +38,7 @@ class Greeting extends React
 	{
 		return @dom '
 			<div>
-				<p>Hello <strong>{this.props.greeter}</strong>!</p>
-				<img src="reacthx.png" />
+				<p>Hello <strong>{this.props.greeter}</strong>!</p>				
 			</div>
 		';
 	}		

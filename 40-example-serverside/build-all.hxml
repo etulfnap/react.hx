@@ -3,5 +3,6 @@
 -cp ../libs
 -cp ../lib-haxe-js-kit 
 -js bin/server.js 
+-D js-flatten
 
 -cmd node add-require.js
