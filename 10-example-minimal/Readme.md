@@ -40,6 +40,8 @@ When run, it will produce the following
 From a ssh enabled commandline, run the following: `> npm install react-tools` This will install the ReactJS JSX transformation tools that are run when Haxe compiles the source code.
 (As an alternative, you can run the `1-npm-install-dependencies.sh` script, it will do the same.)
 
+If you're on windows, Git-bash has the needed ssh.
+
 ### 2. Compile the Haxe project into bin/app.js
 Compile the project using the following command: `> haxe build.hxml`. It will produce the file **bin/app.js**.
 (As an alternative, you can run the `2-compile.sh` script, it will do the same.)
