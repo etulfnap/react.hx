@@ -18,4 +18,4 @@ All Haxe libraries neede are included in the /libs folder, so there should be no
 
 Have a look in the examples folders. There you can find more information about how to compile and run.
 
-
+https://github.com/cambiata/react.hx/blob/master/react-hx.png
