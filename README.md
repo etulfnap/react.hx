@@ -1,59 +1,21 @@
 # react.hx
 
-### example-minimal
-Simplistic example with one single React component, the App class.
+ReactJS (http://facebook.github.io/react/) is a 
 
-To start the whole thing, we use the following static main entry point. As seen, it will render a component called App, and pass a greeting property to it with the value "world":
-```haxe
-	static function main() 
-	{
-		React.renderComponent(
-			@dom '<App greeter="world" />',
-			 js.Browser.document.body
-		);
-	}
-```
-Note the @dom meta directive preceeding the xml block - that is what kicks of the jsx transformation from xml into valid React javascript code for building the DOM elements.
+## Dependencies
 
-The App class itself has only one method, render(). Here, we can see how the greeting value can be reached as a property of the App class, as ```this.props.greeter```:
+For these examples to work, you need the following
 
-```haxe
-package ;
+- Haxe 3.1.3 (http://haxe.org/download/) with Neko
+- NodeJS and NPM package manager (http://nodejs.org/)	
+- SSH enabled commandline tool. (On osx/linux any terminal should work, on Windows Git-bash should do it.)
 
-import react.React;
+### Haxe libraries
 
-class App extends React
-{	
-  ...
+All Haxe libraries neede are included in the /libs folder, so there should be no need for haxlib installations.
 
-  public function render()
-  {
-    return @dom '
-      <div>
-        <h1>Hello {this.props.greeter}!</h1>
-      </div>
-      ';
-  }	
-}
-```
+## Examples
 
-
-
-### example-commentbox
-Closely follows the official React tutorial: http://facebook.github.io/react/docs/tutorial.html
-
-### example-filterproducts
-Roughly follows the "Thinking in React" tutorial: http://facebook.github.io/react/docs/thinking-in-react.html
-
-
-Changes from original react.hx:
-
-- some minor fixes like cleaning jsx code from linebreaks (causing errors in some cases)
-- hack to allow React classes to live in other than package root (see example-filterproducts)
-- haxelib library dependecies are replaced with inclusion in /libs - to avoid problems with react.hx incompatibility with later tink_core 1.0.0-rc* versions
-
-*node* and *nmp* need to be installed on your machine
-
-
+Have a look in the examples folders. There you can find more information about how to compile and run.
 
 
