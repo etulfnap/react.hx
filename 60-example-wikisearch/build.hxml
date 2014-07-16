@@ -1,0 +1,6 @@
+-js bin/app.js
+-main App
+-cp src
+-cp ../src
+-cp ../libs
+-D js-flatten

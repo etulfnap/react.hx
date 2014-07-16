@@ -1,4 +1,0 @@
--cp src 
--cp ../libs 
--neko bin/main.n 
--main Main
