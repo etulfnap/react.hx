@@ -6,6 +6,7 @@
 -D nodejs 
 -main Server 
 --remap sys:sys
+-D js-flatten
 
 -cmd node add-require.js
 
@@ -15,6 +16,6 @@
 -main Client
 -cp src
 -cp ../libs
--D embed_js
+-D js-flatten
 
 	

@@ -1,4 +1,4 @@
-package controller ;
+package ;
 import react.React;
 
 /**
@@ -18,5 +18,5 @@ class PageController extends React
 		}
 	}
 	
-	public function render() return @dom 'dummyx';
+	public function render() return @dom '<noscript />';
 }

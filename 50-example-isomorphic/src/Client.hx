@@ -8,7 +8,7 @@ import comps.Home;
 import comps.About;
 import comps.Error404;
 import comps.RenderMode;
-import controller.PageController;
+import PageController;
 
 /**
  * ...

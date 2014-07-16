@@ -2,7 +2,7 @@ import comps.Home;
 import comps.About;
 import comps.Error404;
 import comps.RenderMode;
-import controller.PageController;
+import PageController;
 import js.npm.connect.Static;
 import js.npm.Express;
 import js.npm.express.*;
@@ -23,11 +23,9 @@ class Server
 	function defaultHandler( req : Request , res : Response )
 	{
 		var url = req.path;
-		var indexHtml = '<!doctype html>' + Indexpage.getHtml(req.originalUrl);
+		var indexHtml = '<!DOCTYPE html>' + Indexpage.getHtml(req.originalUrl);
 		res.send(indexHtml);
 	}
-	
-	public function render() return @dom 'dummyx';
 	
 	static function main()
 	{
@@ -61,9 +59,13 @@ class Indexpage extends React
 				<div id="content">
 					$content
 				</div>
+				
+				<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+				<script src="/react.js" ></script>			
+				<script src="/client.js" ></script>				
+				
 			</body>
-			<script src="/react.js" type="text/javascript"></script>
-			<script src="/client.js" type="text/javascript"></script>
+
 			</html>						
 		'
 		.replace('\t', '');
@@ -72,6 +74,6 @@ class Indexpage extends React
 	
 	// This render() method is only needed because this class extends React. 
 	// When figured out how to invoke JSX trnasformation directly, this won't be needed...
-	public function render() return @dom 'dummy';
+	public function render() return @dom '<noscript />';
 }
 
