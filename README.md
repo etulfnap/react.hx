@@ -1,6 +1,6 @@
 # react.hx
 
-![React.hx](/master/react-hx.png?raw=true "React.hx")
+![React.hx](/react-hx.png?raw=true "React.hx")
 
 React.hx is a Haxe extern implementation of ReactJS created by Franco Ponticelli (https://github.com/fponticelli)
 Check out the ReactJS site (http://reactjs.org) for great information and tutorials!
