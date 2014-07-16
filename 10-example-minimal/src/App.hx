@@ -19,7 +19,7 @@ class App extends React
 				',
 				
 			// Injecti the result into the the DOM element of your choice here:
-			 js.Browser.document.body
+			 js.Browser.document.getElementById
 		);
 		// Above, we apply the rendered elements to the body (js.Browser.document.body),
 		// but we could apply it to any DOM element by using something like js.Browser.document.getElementById('content')
@@ -37,9 +37,7 @@ class Greeting extends React
 	public function render() 
 	{
 		return @dom '
-			<div>
-				<p>Hello <strong>{this.props.greeter}</strong>!</p>				
-			</div>
+			<p>Hello <strong>{this.props.greeter}</strong>!</p>				
 		';
 	}		
 }
