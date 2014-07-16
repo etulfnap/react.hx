@@ -1,8 +1,10 @@
-# Example commentbox
+# Example filterbox
 
-Closely follows the official React tutorial: http://facebook.github.io/react/docs/tutorial.html
+Roughly follows the "Thinking in React" tutorial: http://facebook.github.io/react/docs/thinking-in-react.html
 	
-Have a look there!
+Highly recommended reading!
+
+
 
 ## Compiling and running the demo
 
