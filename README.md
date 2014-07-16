@@ -53,7 +53,7 @@ For these examples to work, you need the following
 
 ### Haxe libraries
 
-All Haxe libraries neede for the examples are included in the /libs folder, so there should be no need for haxlib installations. The following libraries are included:
+All Haxe libraries neede for the examples are included in the /libs folder, so there should be no need for haxlib installations. The following libraries are used:
 - React (Franco Ponticelli, https://github.com/fponticelli/react.hx)
 - Tinkerbell (tink_core, tink_macro, Juraj Kirschheim, https://github.com/haxetink)
 - jQueryExtern (Andy Li, https://github.com/andyli/jQueryExternForHaxe)
