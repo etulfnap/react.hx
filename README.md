@@ -2,8 +2,9 @@
 
 ![React.hx](/react-hx.png?raw=true "React.hx")
 
-React.hx is a Haxe extern implementation of ReactJS created by Franco Ponticelli (https://github.com/fponticelli)
-Check out the ReactJS site (http://reactjs.org) for great information and tutorials!
+React.hx is a Haxe extern implementation of ReactJS created by Franco Ponticelli (https://github.com/fponticelli).
+
+Have a look at the ReactJS site (http://reactjs.org) for great information and tutorials!
 
 ## Status: Proof of concept
 
