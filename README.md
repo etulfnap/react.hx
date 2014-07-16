@@ -37,7 +37,6 @@ Have a look in the examples folders. There you can find more information about h
 ## TODOs
 
 Some subjects of development:
-	
 - The beauty of Haxe typing is lost in the React translation. Hopefully there is a way to handle the **props** and **state** in fully Haxe typed way.
 - 
 - 
